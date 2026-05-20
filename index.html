@@ -50,7 +50,6 @@ video {
   <div id="overlay-text">Loading...</div>
 
 </div>
-
 <script>
 // CPA LINKS
 const offerMap = {
@@ -65,13 +64,20 @@ const offerMap = {
 
 // TEXT TRANSLATIONS
 const textMap = {
-  en: "Preparing your download… Redirecting in 10 seconds",
-  es: "Preparando tu descarga… Redirigiendo en 10 segundos",
-  pt: "Preparando seu download… Redirecionando em 10 segundos",
-  fr: "Préparation de votre téléchargement… Redirection dans 10 secondes",
-  el: "Προετοιμασία λήψης… Ανακατεύθυνση σε 10 δευτερόλεπτα",
-  ar: "جارٍ تجهيز التنزيل… سيتم التحويل خلال 10 ثوانٍ",
-  ru: "Подготовка загрузки… Перенаправление через 10 секунд"
+  en: "Must watch- redirecting in 15 seconds...
+Steps to Download Tutorial"
+  es: "Debe verlo — redirigiendo en 15 segundos...
+Pasos para descargar el tutorial".
+  pt: "Imperdível — redirecionando em 15 segundos...
+Passos para baixar o tutorial",
+  fr: "À regarder absolument — redirection dans 15 secondes...
+Étapes pour télécharger le tutoriel"
+  el: "Πρέπει να το δείτε — ανακατεύθυνση σε 15 δευτερόλεπτα...
+Βήματα για λήψη του οδηγού",
+  ar: "يجب المشاهدة — جارٍ إعادة التوجيه خلال 15 ثانية...
+خطوات تنزيل الشرح",
+  ru: "Обязательно к просмотру — перенаправление через 15 секунд...
+Шаги для загрузки руководства"
 };
 
 // Detect language
@@ -85,13 +91,13 @@ const overlay = document.getElementById("overlay-text");
 overlay.innerText = textMap[userLang] || textMap["en"];
 
 // Countdown
-let timeLeft = 10;
+let timeLeft = 15;
 
 const timer = setInterval(() => {
   timeLeft--;
 
   overlay.innerText = (textMap[userLang] || textMap["en"])
-    .replace("10", timeLeft);
+    .replace("15", timeLeft);
 
   if (timeLeft <= 0) {
     clearInterval(timer);
