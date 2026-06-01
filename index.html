@@ -42,14 +42,14 @@ video {
 <body>
 
 <div class="video-container">
-
-  <video autoplay muted playsinline preload="autos">
+  <video autoplay muted playsinline preload="auto" onerror="handleVideoError()">
     <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
 
   <div id="overlay-text">Loading...</div>
-
 </div>
+
 <script>
 // CPA LINKS
 const offerMap = {
@@ -64,24 +64,17 @@ const offerMap = {
 
 // TEXT TRANSLATIONS
 const textMap = {
-  en: "Must watch- redirecting in 15 seconds...
-Steps to Download Tutorial"
-  es: "Debe verlo — redirigiendo en 15 segundos...
-Pasos para descargar el tutorial".
-  pt: "Imperdível — redirecionando em 15 segundos...
-Passos para baixar o tutorial",
-  fr: "À regarder absolument — redirection dans 15 secondes...
-Étapes pour télécharger le tutoriel"
-  el: "Πρέπει να το δείτε — ανακατεύθυνση σε 15 δευτερόλεπτα...
-Βήματα για λήψη του οδηγού",
-  ar: "يجب المشاهدة — جارٍ إعادة التوجيه خلال 15 ثانية...
-خطوات تنزيل الشرح",
-  ru: "Обязательно к просмотру — перенаправление через 15 секунд...
-Шаги для загрузки руководства"
+  en: "Must watch- redirecting in 15 seconds...\nSteps to Download Tutorial",
+  es: "Debe verlo — redirigiendo en 15 segundos...\nPasos para descargar el tutorial",
+  pt: "Imperdível — redirecionando em 15 segundos...\nPassos para baixar o tutorial",
+  fr: "À regarder absolument — redirection dans 15 secondes...\nÉtapes pour télécharger le tutoriel",
+  el: "Πρέπει να το δείτε — ανακατεύθυνση σε 15 δευτερόλεπτα...\nΒήματα για λήψη του οδηγού",
+  ar: "يجب المشاهدة — جارٍ إعادة التوجيه خلال 15 ثانية...\nخطوات تنزيل الشرح",
+  ru: "Обязательно к просмотру — перенаправление через 15 секунд...\nШаги для загрузки руководства"
 };
 
 // Detect language
-const userLang = (navigator.language || 'en').slice(0,2);
+const userLang = (navigator.language || 'en').slice(0, 2);
 
 // Select correct offer
 const finalOffer = offerMap[userLang] || offerMap["en"];
@@ -90,12 +83,21 @@ const finalOffer = offerMap[userLang] || offerMap["en"];
 const overlay = document.getElementById("overlay-text");
 overlay.innerText = textMap[userLang] || textMap["en"];
 
+// Hide overlay when video starts playing
+const video = document.querySelector('video');
+video.addEventListener('playing', () => {
+  overlay.style.display = 'none';
+});
+
+// Fallback for video error
+function handleVideoError() {
+  overlay.innerText = "Video failed to load. Redirecting...";
+}
+
 // Countdown
 let timeLeft = 15;
-
 const timer = setInterval(() => {
   timeLeft--;
-
   overlay.innerText = (textMap[userLang] || textMap["en"])
     .replace("15", timeLeft);
 
