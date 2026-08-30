@@ -83,11 +83,7 @@ const finalOffer = offerMap[userLang] || offerMap["en"];
 const overlay = document.getElementById("overlay-text");
 overlay.innerText = textMap[userLang] || textMap["en"];
 
-// Hide overlay when video starts playing
-const video = document.querySelector('video');
-video.addEventListener('playing', () => {
-  overlay.style.display = 'none';
-});
+
 
 // Fallback for video error
 function handleVideoError() {
